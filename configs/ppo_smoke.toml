@@ -1,0 +1,43 @@
+# 本机试水：轮次少、局数少，只为跑通「训练→存盘→评估」
+[env]
+n_games = 4
+seat = 0
+threads = 4
+# turn_action_caps 限制每回合操作次数，避免无限点来点去
+rules = { turn_action_caps = [48] }
+
+[model]
+embedding_dim = 16
+hidden_sizes = [256, 256]
+
+[ppo]
+# 4 games * 128 steps = 512 / update；共 8 次更新 ≈ 很快结束
+total_timesteps = 4096
+rollout_steps = 128
+learning_rate = 0.0003
+anneal_lr = true
+gamma = 0.999
+gae_lambda = 0.95
+update_epochs = 2
+minibatch_size = 256
+clip_coef = 0.2
+value_clip = true
+value_coef = 0.5
+entropy_coef = 0.01
+max_grad_norm = 0.5
+target_kl = 0.05
+
+[evaluation]
+episodes = 8
+n_games = 4
+seed = 1000000
+every_updates = 4
+deterministic = true
+max_vector_steps = 20000
+
+[run]
+seed = 42
+device = "cpu"
+torch_threads = 2
+output_dir = "runs/ppo_smoke"
+checkpoint_every_updates = 4

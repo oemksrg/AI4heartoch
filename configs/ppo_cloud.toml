@@ -1,0 +1,42 @@
+# 云 GPU 起步配置：比 smoke 大，但仍远小于论文量级
+[env]
+n_games = 16
+seat = 0
+threads = 8
+rules = { turn_action_caps = [48] }
+
+[model]
+embedding_dim = 16
+hidden_sizes = [256, 256]
+
+[ppo]
+# 16 * 256 = 4096 / update；约 32 次更新
+total_timesteps = 131072
+rollout_steps = 256
+learning_rate = 0.0003
+anneal_lr = true
+gamma = 0.999
+gae_lambda = 0.95
+update_epochs = 4
+minibatch_size = 512
+clip_coef = 0.2
+value_clip = true
+value_coef = 0.5
+entropy_coef = 0.01
+max_grad_norm = 0.5
+target_kl = 0.03
+
+[evaluation]
+episodes = 32
+n_games = 8
+seed = 1000000
+every_updates = 8
+deterministic = true
+max_vector_steps = 20000
+
+[run]
+seed = 42
+device = "cuda"
+torch_threads = 4
+output_dir = "runs/ppo_cloud"
+checkpoint_every_updates = 8
