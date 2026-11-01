@@ -127,11 +127,15 @@ python -m tavernbench.report --set data/eval --runs results/eval \
    - 验证整局 bot：`python scripts/verify_bot_game.py`
    - 随机合法动作：`python scripts/takeover_random.py --episodes 3`
    - 简单启发式：`python scripts/takeover_heuristic.py --episodes 5`
-2. **强化学习**：用 `BatchEnv` 接 PPO 等（需自研训练循环；官方训练代码未开源）。
+2. **强化学习**（已提供最小训练器；官方训练代码未开源）：
+   - 推荐（不依赖 PyTorch）：`python scripts/train_numpy_a2c.py --steps 20000 --n-games 16`
+   - PyTorch 版（若本机 `import torch` 正常）：`python scripts/train_a2c.py --steps 30000`
+   - 对比评估：`python scripts/eval_compare.py --episodes 12`
+   - 权重默认在 `runs/`（该目录已 gitignore）
 3. **LLM / Agent**：对状态做文本化或工具调用，在 TavernBench 上对比已发布答案。
 4. **评测闭环**：仿真局内名次 + Bench 分数一起看，避免只刷一种指标。
 
-说明：随机基线名次通常很差；启发式偶有好名次但仍不稳定。接口跑通后，把 `choose_action` 换成你的模型即可。
+说明：短训后名次仍可能接近第 8——观测维度高、奖励稀疏，需要加长训练或换更强网络；先保证训练循环能稳定跑完。
 
 ## 7. Git 远程建议
 
