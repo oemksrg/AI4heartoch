@@ -1,0 +1,12 @@
+{
+  "best": {
+    "global_step": 26836992,
+    "parameters": 1528054,
+    "sha256": "2cd36ddeffd52ab96009a99d65956bda331307186a0db1a95790c0589dacf6c1"
+  },
+  "latest": {
+    "global_step": 31457280,
+    "parameters": 1528054,
+    "sha256": "54db498cb40e7a00ce54d8b1f2b3277a4e24e8f60dedf5c81da73443f0eb5537"
+  }
+}

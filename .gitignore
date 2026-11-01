@@ -32,6 +32,10 @@ id_ed25519*
 .netrc
 .pypirc
 
+# local downloads / bulky assets
+/下载文件/
+/checkpoints/*.pt
+
 # your own runs, logs and models (the released results are tavernbench/results/)
 /answers/
 /tavernbench/answers/
