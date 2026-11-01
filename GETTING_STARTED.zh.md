@@ -124,15 +124,14 @@ python -m tavernbench.report --set data/eval --runs results/eval \
 
 1. **脚本策略**（已提供基线）：
    - 激活环境：`E:\AI4heartoch\.venv\Scripts\Activate.ps1`
+   - 验证整局 bot：`python scripts/verify_bot_game.py`
    - 随机合法动作：`python scripts/takeover_random.py --episodes 3`
    - 简单启发式：`python scripts/takeover_heuristic.py --episodes 5`
-   - 更完整规则基线：`python scripts/takeover_baseline.py --episodes 5`
-   - 验证整局 bot：`python scripts/verify_bot_game.py`
 2. **强化学习**：用 `BatchEnv` 接 PPO 等（需自研训练循环；官方训练代码未开源）。
 3. **LLM / Agent**：对状态做文本化或工具调用，在 TavernBench 上对比已发布答案。
 4. **评测闭环**：仿真局内名次 + Bench 分数一起看，避免只刷一种指标。
 
-说明：当前随机/启发式基线名次会很差（常见第 8），这是正常现象；接口跑通后即可替换 `choose_action` 为你的模型。
+说明：随机基线名次通常很差；启发式偶有好名次但仍不稳定。接口跑通后，把 `choose_action` 换成你的模型即可。
 
 ## 7. Git 远程建议
 
