@@ -126,6 +126,7 @@ python -m tavernbench.report --set data/eval --runs results/eval \
    - 激活环境：`E:\AI4heartoch\.venv\Scripts\Activate.ps1`
    - 随机合法动作：`python scripts/takeover_random.py --episodes 3`
    - 简单启发式：`python scripts/takeover_heuristic.py --episodes 5`
+   - 更完整规则基线：`python scripts/takeover_baseline.py --episodes 5`
    - 验证整局 bot：`python scripts/verify_bot_game.py`
 2. **强化学习**：用 `BatchEnv` 接 PPO 等（需自研训练循环；官方训练代码未开源）。
 3. **LLM / Agent**：对状态做文本化或工具调用，在 TavernBench 上对比已发布答案。
