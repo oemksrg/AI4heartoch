@@ -107,23 +107,31 @@ python -m tavernbench.report --set data/eval --runs results/eval \
 
 ### 阶段 B：环境跑通
 
-- [ ] 安装 Python 3.10+ 与 Rust（rustup）
-- [ ] `pip install .` 编译成功，`import taverngym` 可用
-- [ ] 跑通 5.2 一局 bot 对局
+- [x] 安装 Python 3.10+（本机：`E:\AI4heartoch\.venv`，基于 Anaconda 3.10）与 Rust 1.98.1（rustup）
+- [x] 安装 Visual Studio Build Tools（MSVC，编译 Python 扩展需要）
+- [x] `pip install -e .` 编译成功，`import taverngym` 可用
+- [x] 跑通验证脚本：`python scripts/verify_bot_game.py`
+- [x] 接管基线：`scripts/takeover_random.py` / `scripts/takeover_heuristic.py`
 - [ ] （可选）跑通 TavernBench 打分命令
 
 ### 阶段 C：上传到你自己的 GitHub
 
-- [ ] 在你的账号下 Fork 或新建仓库（不要直接 push 到 `MCG-NJU/AutoTavern`，除非你是该组织协作者）
-- [ ] 本地 `origin` 指向你的仓库；可选保留 `upstream` → `MCG-NJU/AutoTavern`
-- [ ] 提交本中文文档并 `git push`
+- [x] 仓库：https://github.com/oemksrg/AI4heartoch
+- [x] `origin` → 你的仓库；`upstream` → `MCG-NJU/AutoTavern`
+- [x] 已提交本中文文档并 push
 
 ### 阶段 D：接管训练（后续主线）
 
-1. **脚本策略**：在 `BattlegroundsEnv` 上用规则/启发式选合法动作，确认观测与奖励含义。
+1. **脚本策略**（已提供基线）：
+   - 激活环境：`E:\AI4heartoch\.venv\Scripts\Activate.ps1`
+   - 随机合法动作：`python scripts/takeover_random.py --episodes 3`
+   - 简单启发式：`python scripts/takeover_heuristic.py --episodes 5`
+   - 验证整局 bot：`python scripts/verify_bot_game.py`
 2. **强化学习**：用 `BatchEnv` 接 PPO 等（需自研训练循环；官方训练代码未开源）。
 3. **LLM / Agent**：对状态做文本化或工具调用，在 TavernBench 上对比已发布答案。
 4. **评测闭环**：仿真局内名次 + Bench 分数一起看，避免只刷一种指标。
+
+说明：当前随机/启发式基线名次会很差（常见第 8），这是正常现象；接口跑通后即可替换 `choose_action` 为你的模型。
 
 ## 7. Git 远程建议
 
