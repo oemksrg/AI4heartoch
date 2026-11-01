@@ -2,6 +2,8 @@
 
 本文面向在本机 `E:\AI4heartoch` 基于 [MCG-NJU/AutoTavern](https://github.com/MCG-NJU/AutoTavern) 做**酒馆战棋接管训练 AI** 的开发者。官方英文说明见根目录 [README.md](README.md) 与 [docs/](docs/)。
 
+若需要给完全不了解背景的人看「我们在做什么、每一步干什么、做到哪了」，请先读 [从零了解本项目.md](从零了解本项目.md)。
+
 ## 1. 一句话介绍
 
 AutoTavern 把《炉石传说：酒馆战棋》的决策做成可复现的研究环境：用 **TavernGym** 跑完整对局并接学习算法，用 **TavernBench** 在固定题库上评测模型判断力。对应论文 *Build, Don't Play*（南京大学 / 上海 AI Lab）。
@@ -131,7 +133,10 @@ python -m tavernbench.report --set data/eval --runs results/eval \
    - 推荐（不依赖 PyTorch）：`python scripts/train_numpy_a2c.py --steps 20000 --n-games 16`
    - PyTorch 版（若本机 `import torch` 正常）：`python scripts/train_a2c.py --steps 30000`
    - 对比评估：`python scripts/eval_compare.py --episodes 12`
-   - 权重默认在 `runs/`（该目录已 gitignore）
+   - **外部权重 `last.pt`**（Transformer 策略，约 65MB）：  
+     `D:\app\anaconda\python.exe scripts/eval_last_pt.py --checkpoint last.pt --episodes 5`  
+     （当前项目 `.venv` 的 torch DLL 可能无法加载，请用 Anaconda 的 Python；架构为逆向加载，强度可能低于原训练代码）
+   - 权重默认在 `runs/` / `last.pt`（`*.pt` 已 gitignore）
 3. **LLM / Agent**：对状态做文本化或工具调用，在 TavernBench 上对比已发布答案。
 4. **评测闭环**：仿真局内名次 + Bench 分数一起看，避免只刷一种指标。
 
